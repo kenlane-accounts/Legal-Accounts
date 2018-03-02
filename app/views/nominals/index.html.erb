@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Nominals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Desc</th>
+      <th>Isoffice</th>
+      <th>Isclient</th>
+      <th>Isdeposit</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nominals.each do |nominal| %>
+      <tr>
+        <td><%= nominal.code %></td>
+        <td><%= nominal.desc %></td>
+        <td><%= nominal.isoffice %></td>
+        <td><%= nominal.isclient %></td>
+        <td><%= nominal.isdeposit %></td>
+        <td><%= link_to 'Show', nominal %></td>
+        <td><%= link_to 'Edit', edit_nominal_path(nominal) %></td>
+        <td><%= link_to 'Destroy', nominal, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Nominal', new_nominal_path %>

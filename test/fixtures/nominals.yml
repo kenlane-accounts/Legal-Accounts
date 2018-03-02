@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code: MyString
+  desc: MyString
+  isoffice: false
+  isclient: false
+  isdeposit: false
+
+two:
+  code: MyString
+  desc: MyString
+  isoffice: false
+  isclient: false
+  isdeposit: false

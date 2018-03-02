@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Tran:</strong>
+  <%= @nomtran.tran %>
+</p>
+
+<p>
+  <strong>Nominal:</strong>
+  <%= @nomtran.nominal %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @nomtran.date %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @nomtran.amount %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @nomtran.type %>
+</p>
+
+<%= link_to 'Edit', edit_nomtran_path(@nomtran) %> |
+<%= link_to 'Back', nomtrans_path %>

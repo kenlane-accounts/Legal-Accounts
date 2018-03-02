@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Trdetails:</strong>
+  <%= @tran.trdetails %>
+</p>
+
+<p>
+  <strong>Tramount:</strong>
+  <%= @tran.tramount %>
+</p>
+
+<p>
+  <strong>Tranhead:</strong>
+  <%= @tran.tranhead %>
+</p>
+
+<%= link_to 'Edit', edit_tran_path(@tran) %> |
+<%= link_to 'Back', trans_path %>

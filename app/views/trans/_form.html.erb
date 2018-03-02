@@ -1,0 +1,29 @@
+<%= form_for(@tran) do |f| %>
+  <% if @tran.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tran.errors.count, "error") %> prohibited this tran from being saved:</h2>
+
+      <ul>
+      <% @tran.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :trdetails %><br>
+    <%= f.text_field :trdetails %>
+  </div>
+  <div class="field">
+    <%= f.label :tramount %><br>
+    <%= f.text_field :tramount %>
+  </div>
+  <div class="field">
+    <%= f.label :tranhead_id %><br>
+    <%= f.text_field :tranhead_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

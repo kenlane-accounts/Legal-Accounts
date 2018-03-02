@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  trdetails: MyString
+  tramount: 
+  tranhead_id: 
+
+two:
+  trdetails: MyString
+  tramount: 
+  tranhead_id: 

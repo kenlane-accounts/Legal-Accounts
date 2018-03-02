@@ -1,0 +1,36 @@
+<div class='container uic-main-border' >
+  <div class='coontainer-fluid'>
+    <div class="row">
+      <div class="col-sm-12 text-xs-center bootstrap-welcome">
+        <h1>Transactions</h1>
+      </div>
+    </div>
+    
+    <div class="table-responsive" style="float:left; margin-right: 15px;">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>
+              <small>Reference</small>
+            </th>
+            <th>
+              <small>Transaction Date</small>
+            </th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <%= render partial: 'tranhead', collection: @tranheads %>
+        </tbody>
+
+      </table>
+    </div>  
+  </div>
+</div>
+<br>
+<div>
+  <%= link_to 'New Nominal Payment', new_tranheads_opnom_path, class: "btn btn-small btn-success" %>
+</div>
+<div>
+  <%= link_to 'New Supplier Payment', new_tranheads_opsup_path, class: "btn btn-small btn-success" %>
+</div>

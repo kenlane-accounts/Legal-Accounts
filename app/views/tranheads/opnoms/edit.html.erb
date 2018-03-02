@@ -1,0 +1,8 @@
+<h1>Editing Nominal Payment</h1>
+
+<%= simple_form_for @tranhead, url: tranheads_opnom_path(@tranhead) do |f| %>
+        <%= render 'form', f: f %>
+<% end %>
+
+<%= link_to 'Show', tranhead_path(@tranhead) %> |
+<%= link_to 'Back', tranheads_path %>

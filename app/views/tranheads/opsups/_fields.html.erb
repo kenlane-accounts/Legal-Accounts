@@ -1,0 +1,19 @@
+<div class="nested-fields">
+    <%= f.input :type, :as => :hidden %>
+    <div class="row">
+        <div class="col-sm-1">
+            <%= f.association :supplier, label_method: :supname, label: "Supplier", value_method: :id %>  
+        </div>
+        <div class="col-sm-2">
+          <%= f.input :trdetails, label: "Description" %>
+        </div>
+        <div class="col-sm-1">
+          <%= f.input :tramount, label: "Amount",  :input_html => {:onblur =>"SetVat(this,true)"} %>
+        </div>
+        <% if @i==1 %>
+            <div class="col-md-1">
+                <%= link_to_remove_association button_tag('Remove Line', type: "button"), f %>
+            </div>
+        <% end %>
+    </div>
+</div>

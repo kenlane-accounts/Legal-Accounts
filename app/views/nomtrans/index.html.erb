@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Nomtrans</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Tran</th>
+      <th>Nominal</th>
+      <th>Date</th>
+      <th>Amount</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @nomtrans.each do |nomtran| %>
+      <tr>
+        <td><%= nomtran.tran %></td>
+        <td><%= nomtran.nominal %></td>
+        <td><%= nomtran.date %></td>
+        <td><%= nomtran.amount %></td>
+        <td><%= nomtran.type %></td>
+        <td><%= link_to 'Show', nomtran %></td>
+        <td><%= link_to 'Edit', edit_nomtran_path(nomtran) %></td>
+        <td><%= link_to 'Destroy', nomtran, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Nomtran', new_nomtran_path %>
