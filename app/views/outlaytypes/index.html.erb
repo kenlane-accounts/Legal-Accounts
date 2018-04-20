@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Outlaytypes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Outcode</th>
+      <th>Outdesc</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @outlaytypes.each do |outlaytype| %>
+      <tr>
+        <td><%= outlaytype.outcode %></td>
+        <td><%= outlaytype.outdesc %></td>
+        <td><%= link_to 'Show', outlaytype %></td>
+        <td><%= link_to 'Edit', edit_outlaytype_path(outlaytype) %></td>
+        <td><%= link_to 'Destroy', outlaytype, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Outlaytype', new_outlaytype_path %>

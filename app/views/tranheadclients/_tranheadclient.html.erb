@@ -1,0 +1,22 @@
+<% tranheadclient.trans.each_with_index do |ptran, i| %>
+  <tr>
+    <% if i==0 %>
+      <td><%= tranheadclient.bank.code %></td>
+      <td><%= tranheadclient.trref %></td>
+      <td><%= tranheadclient.trdate %></td>
+    <% else %>
+      <td></td>
+      <td></td>
+      <td></td>
+    <% end %>
+    
+    <td><%= ptran.trdetails %></td>
+    <td><%= ptran.case.try(:reference) %></td>
+    <td><%= ptran.tramount %></td>
+
+    <% if i==0 %>
+      <%= render_specific_data_for tranheadclient %>
+    <% end %>
+  
+  </tr>  
+<% end %>

@@ -1,0 +1,49 @@
+<%= simple_form_for(@case) do |f| %>
+
+  <div class="panel panel-primary" >
+    <div class="panel-heading epa_heading epa_panel" > Case <i class="fa fa-bars pull-right epa_icon rotate2" aria-hidden="true"></i></div>
+      <div class="panel-body epa_body epa_panel_body">
+        <%= f.error_notification %>
+
+        <div class="form-group form-group-sm">
+          <div class="row">
+            <div class="col-sm-2">
+              <%= f.input :reference %>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group form-group-sm">
+          <div class="row">
+            <div class="col-sm-4">
+              <%= f.input :description %>
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group form-group-sm">
+          <div class="row">
+            <div class="col-sm-2">
+              <%= f.association :client, label_method: :info %>
+            </div>
+          </div>
+        </div>
+              
+        <div class="form-group form-group-sm">
+          <div class="row">
+            <div class="col-sm-2">
+              <%= f.association :casestatus, label_method: :code %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <%= f.submit 'Save', class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', cases_path, class: 'btn btn-primary', :data => {:confirm => 'Are you sure you want to cancel?'} %>
+      </div>
+
+    </div>
+  </div>
+
+<% end %>

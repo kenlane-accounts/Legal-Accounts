@@ -1,8 +1,9 @@
 <div class='container uic-main-border' >
   <div class='coontainer-fluid'>
+
     <div class="row">
       <div class="col-sm-12 text-xs-center bootstrap-welcome">
-        <h1>Transactions</h1>
+        <h1>Office Payments and Receipts</h1>
       </div>
     </div>
     
@@ -10,17 +11,23 @@
       <table class="table table-bordered">
         <thead>
           <tr>
-            <th>
-              <small>Reference</small>
-            </th>
-            <th>
-              <small>Transaction Date</small>
-            </th>
+            <th><small>Bank</small></th>
+            <th><small>Cheque No.</small></th>
+            <th><small>Date</small></th>
+            <th style="width: 350px;"><small>Details</small></th>
+            <th><small>Case</small></th>
+            <th><small>Supplier</small></th>
+            <th><small>Nominal</small></th>
+            <th><small>VAT Code</small></th>
+            <th><small>VAT %</small></th>
+            <th><small>VAT Amt.</small></th>
+            <th><small>Net Amount</small></th>
+            <th><small>Total Amount</small></th>
           </tr>
         </thead>
       
         <tbody>
-          <%= render partial: 'tranhead', collection: @tranheads %>
+          <%= render partial: 'tranhead', collection: @tranhead %>
         </tbody>
 
       </table>
@@ -32,5 +39,19 @@
   <%= link_to 'New Nominal Payment', new_tranheads_opnom_path, class: "btn btn-small btn-success" %>
 </div>
 <div>
+  <%= link_to 'New Nominal Receipt', new_tranheads_ornom_path, class: "btn btn-small btn-success" %>
+</div>
+<br>
+<div>
   <%= link_to 'New Supplier Payment', new_tranheads_opsup_path, class: "btn btn-small btn-success" %>
+</div>
+<div>
+  <%= link_to 'New Supplier Receipt', new_tranheads_orsup_path, class: "btn btn-small btn-success" %>
+</div>
+<br>
+<div>
+  <%= link_to 'New Case Payment (Disbursement)', new_tranheads_opmat_path, class: "btn btn-small btn-success" %>
+</div>
+<div>
+  <%= link_to 'New Case Receipt', new_tranheads_ormat_path, class: "btn btn-small btn-success" %>
 </div>

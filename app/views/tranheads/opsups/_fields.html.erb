@@ -10,6 +10,9 @@
         <div class="col-sm-1">
           <%= f.input :tramount, label: "Amount",  :input_html => {:onblur =>"SetVat(this,true)"} %>
         </div>
+        <div class="col-sm-2">
+          <%= f.input :thirdp, label: "Include in 3rd Party Returns"%>
+        </div>
         <% if @i==1 %>
             <div class="col-md-1">
                 <%= link_to_remove_association button_tag('Remove Line', type: "button"), f %>

@@ -25,7 +25,7 @@
               </div>
             </div>
             
-            <%= f.simple_fields_for :trans, url: tranheads_opsups_path do |p| %>
+            <%= f.simple_fields_for :trans, as: :tranopsup do |p| %>
               <%= render 'fields', f: p %>
               <% @i = 1 %>
             <% end %>
@@ -36,7 +36,8 @@
             
           </div>
           <div class="panel-footer">
-            <%= f.submit 'Save Payment', class: 'btn btn-primary' %>
+            <%= f.submit 'Save', class: 'btn btn-primary' %>
+            <%= link_to 'Cancel', tranheads_path, class: 'btn btn-primary', :data => {:confirm => 'Are you sure you want to cancel?'} %>
           </div>
 
         </div>

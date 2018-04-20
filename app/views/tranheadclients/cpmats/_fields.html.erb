@@ -1,0 +1,38 @@
+<div class="nested-fields">
+    <%= f.input :type, :as => :hidden %>
+    <%= f.input :origamount, :as => :hidden %>
+
+    <div class="form-group form-group-sm">
+      <span style="color:red">
+        <% f.object.errors[:base].each do |key, value| %>
+        <div>
+          <%= key %>
+        </div>
+        <% end %>
+      </span>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-1">
+            <%= f.association :case, label_method: :reference, label: "Case", value_method: :id %>  
+        </div>
+        <div class="col-sm-2">
+          <%= f.input :trdetails, label: "Description" %>
+        </div>
+        <div class="col-sm-1">
+          <%= f.input :tramount, label: "Amount"%>
+        </div>
+
+        <% if f.object.askclientoverdraw or f.object.clientoverdraw=="1" %>
+          <div class="col-md-1">
+              <%= f.input :clientoverdraw, :as => :boolean, label: "Overdraw Case" %> 
+          </div>
+        <% end %>
+
+        <% if @i==1 %>
+            <div class="col-md-1">
+                <%= link_to_remove_association button_tag('Remove Line', type: "button"), f %>
+            </div>
+        <% end %>
+    </div>
+</div>

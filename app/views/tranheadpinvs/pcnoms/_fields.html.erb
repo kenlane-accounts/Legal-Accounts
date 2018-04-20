@@ -1,0 +1,28 @@
+<div class="nested-fields">
+    <%= f.input :type, :as => :hidden %>
+    <div class="row">
+        <div class="col-sm-1">
+            <%= f.association :nominal, label_method: :code, label: "Nominal", value_method: :id %>  
+        </div>
+        <div class="col-sm-2">
+          <%= f.input :trdetails, label: "Description" %>
+        </div>
+        <div class="col-sm-1">
+          <%= f.input :netamount, label: "Net Amount",  :input_html => {:onblur =>"SetINVNominalVat(this,true)"} %>
+        </div>
+        <div class="col-sm-1">
+           <%= f.association :vat, label_method: :info, label: "Vat %", value_method: :id,  :input_html => {:onchange =>"SetINVNominalVat(this,true)"} %>  
+        </div>
+        <div class="col-sm-1">
+           <%= f.input :vatamount, label: "Vat Amount",  :input_html => {:onblur =>"SetINVNominalVat(this,false)"} %>
+        </div>
+        <div class="col-sm-1">
+           <%= f.input :tramount, label: "Amount", :readonly => true %>
+        </div>
+        <% if @i==1 %>
+            <div class="col-md-1">
+                <%= link_to_remove_association button_tag('Remove Line', type: "button"), f %>
+            </div>
+        <% end %>
+    </div>
+</div>

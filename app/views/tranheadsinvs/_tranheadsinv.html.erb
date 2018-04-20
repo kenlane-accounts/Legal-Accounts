@@ -1,0 +1,27 @@
+<% tranheadsinv.trans.each_with_index do |ptran, i| %>
+  <tr>
+    <% if i==0 %>  
+      <td><%= tranheadsinv.trref %></td>
+      <td><%= tranheadsinv.trdate %></td>
+      <td><%= tranheadsinv.case.reference %></td>
+    <% else %>
+      <td></td>
+      <td></td>
+      <td></td>
+    <% end %>
+    
+    <td><%= ptran.nominal.try(:code) %></td>
+    <td><%= ptran.try(:trdetails) %></td>
+    <td><%= ptran.try(:netamount) %></td>
+    <td><%= ptran.vat.try(:vatcode) %></td>
+    <td><%= ptran.try(:vatperc) %></td>
+    <td><%= ptran.try(:vatamount) %></td>
+    <td><%= ptran.try(:outamount) %></td>
+    <td><%= ptran.try(:tramount) %></td>
+
+    <% if i==0 %>
+      <%= render_specific_data_for tranheadsinv %>
+    <% end %>
+  
+  </tr>  
+<% end %>

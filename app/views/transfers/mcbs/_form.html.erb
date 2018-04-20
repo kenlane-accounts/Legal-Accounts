@@ -1,0 +1,77 @@
+
+  <div class="panel panel-primary" >
+    <div class="panel-heading epa_heading epa_panel" > Case to Client Side Transfer <i class="fa fa-bars pull-right epa_icon rotate2" aria-hidden="true"></i></div>
+      <div class="panel-body epa_body epa_panel_body">
+
+        <%= f.error_notification %>
+
+        <div class="form-group form-group-sm">
+          <span style="color:red">
+            <% f.object.errors[:base].each do |key, value| %>
+            <div>
+              <%= key %>
+            </div>
+            <% end %>
+          </span>
+        </div>
+
+
+        <%= f.input :type, :as => :hidden %>
+
+        <div class="form-group form-group-sm">
+          <div class="row">
+            <div class="col-sm-2">
+              <%= f.input :date, label: "Transfer Date", order: [:day, :month, :year]  %>
+            </div>
+          </div>
+        </div>    
+
+        <div class="form-group form-group-sm">
+          <div class="row">
+            <div class="col-sm-1">
+              <%= f.input :reference %>
+            </div>
+            <div class="col-sm-1">
+              <%= f.input :amount %>
+            </div>
+          </div>
+        </div>    
+        <div class="form-group form-group-sm">
+          <div class="row">
+            <div class="col-sm-2">
+              <%= f.input :fromdetails, label: "Transfer from Description" %>
+            </div>
+            <div class="col-sm-1">
+              <%= f.association :fromcase, label_method: :reference, label: "Case From" %>
+            </div>
+            <div class="col-sm-2">
+              <%= f.association :frombank, label_method: :banksel, label: "Bank From" %>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="form-group form-group-sm">
+          <div class="row">
+            <div class="col-sm-2">
+              <%= f.input :todetails, label: "Transfer to Description" %>
+            </div>
+            <div class="col-sm-1">
+              <%= f.association :tocase, label_method: :reference, label: "Case To" %>
+            </div>
+            <div class="col-sm-2">
+              <%= f.association :tobank, label_method: :banksel, label: "Bank To" %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-footer">
+        <%= f.submit 'Save', class: 'btn btn-primary' %>
+        <%= link_to 'Cancel', transfers_path, class: 'btn btn-primary', :data => {:confirm => 'Are you sure you want to cancel?'} %>
+      </div>
+
+    </div>
+  </div>
+

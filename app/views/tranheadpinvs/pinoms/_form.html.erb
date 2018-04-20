@@ -1,0 +1,48 @@
+      <div class="panel panel-primary" >
+        <div class="panel-heading epa_heading epa_panel" > Purchase Invoice Nominal <i class="fa fa-bars pull-right epa_icon rotate2" aria-hidden="true"></i></div>
+          <div class="panel-body epa_body epa_panel_body">
+
+            <%= f.error_notification %>
+
+            <%= f.input :type, :as => :hidden %>
+
+            <div class="form-group form-group-sm">
+              <div class="row">
+                <div class="col-sm-2">
+                  <%= f.association :supplier, label_method: :supname, label: "Select Supplier"%>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group form-group-sm">
+              <div class="row">
+                <div class="col-sm-1">
+                  <%= f.input :trref, label: "Reference" %>
+                </div>
+                <div class="col-sm-1">
+                  <%= f.input :trotherref, label: "Other Reference" %>
+                </div>
+                <div class="col-sm-4">
+                  <%= f.input :trdate, label: "Transaction Date", order: [:day, :month, :year] %>
+                </div>
+              </div>
+            </div>
+
+              <%= f.simple_fields_for :trans, as: :tranpinom do |p| %>
+                <%= render 'fields', f: p %>
+                <% @i = 1 %>
+              <% end %>
+
+              <div class="links">
+                <%= link_to_add_association button_tag('Add Line', type: "button"), f, :trans, :partial => 'fields',  
+                wrap_object: Proc.new { |tran| tran.type = 'Tranpinom'; tran } %>
+              </div>    
+            
+          </div>
+          <div class="panel-footer">
+            <%= f.submit 'Save', class: 'btn btn-primary' %>
+            <%= link_to 'Cancel', tranheadpinvs_path, class: 'btn btn-primary', :data => {:confirm => 'Are you sure you want to cancel?'} %>
+          </div>
+
+        </div>
+      </div>

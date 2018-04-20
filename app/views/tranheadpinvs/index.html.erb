@@ -1,0 +1,50 @@
+<div class='container uic-main-border' >
+  <div class='coontainer-fluid'>
+
+    <div class="row">
+      <div class="col-sm-12 text-xs-center bootstrap-welcome">
+        <h1>Purchase Invoice and Credit Notes</h1>
+      </div>
+    </div>
+    
+    <div class="table-responsive" style="float:left; margin-right: 15px;">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th><small>Reference</small></th>
+            <th><small>Other Reference</small></th>
+            <th><small>Date</small></th>
+            <th><small>Supplier</small></th>
+            <th><small>Nominal</small></th>
+            <th><small>Case</small></th>
+            <th><small>Details</small></th>
+            <th><small>Net Amount</small></th>
+            <th><small>VAT Code</small></th>
+            <th><small>VAT %</small></th>
+            <th><small>VAT Amount</small></th>
+            <th><small>Amount</small></th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <%= render partial: 'tranheadpinv', collection: @tranhead %>
+        </tbody>
+
+      </table>
+    </div>  
+  </div>
+</div>
+<br>
+<div>
+  <%= link_to 'New Case Purchase Invoice', new_tranheadpinvs_pimat_path, class: "btn btn-small btn-success" %>
+</div>
+<div>
+  <%= link_to 'New Case Purchase Invoice Credit Note', new_tranheadpinvs_pcmat_path, class: "btn btn-small btn-success" %>
+</div>
+<br>
+<div>
+  <%= link_to 'New Nominal Purchase Invoice', new_tranheadpinvs_pinom_path, class: "btn btn-small btn-success" %>
+</div>
+<div>
+  <%= link_to 'New Nominal Purchase Invoice Credit Note', new_tranheadpinvs_pcnom_path, class: "btn btn-small btn-success" %>
+</div>

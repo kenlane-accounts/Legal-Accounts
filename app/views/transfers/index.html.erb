@@ -1,0 +1,89 @@
+<br>
+
+<div class='container uic-main-border' >
+  <div class='container-fluid'>
+
+    <div class="row">
+      <div class="col-sm-12 text-xs-center bootstrap-welcome">
+        <h1>Transfers</h1>
+      </div>
+    </div>
+    
+    <div class="table-responsive" style="float:left; margin-right: 15px;">
+      <table class="table table-bordered">
+
+        <p id="notice"><%= notice %></p>
+  
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Reference</th>
+            <th>Amount</th>
+            <th>From Details</th>
+            <th>From Bank</th>
+            <th>From Case</th>
+            <th>From Nominal</th>
+            <th>To Details</th>
+            <th>To Bank</th>
+            <th>To Case</th>
+            <th>To Nominal</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+    
+        <tbody>
+          <% @transfers.each_with_index do |transfer, i| %>
+            <tr>
+              <td><%= transfer.date %></td>
+              <td><%= transfer.reference %></td>
+              <td><%= transfer.amount %></td>
+              <td><%= transfer.fromdetails %></td>
+              
+              <% if !transfer.frombank_id.nil? %>
+                <td><%= transfer.frombank.try(:code) %></td>
+              <% else %>
+                <td> </td>
+              <% end %>
+              
+              <td><%= transfer.fromcase.try(:reference) %></td>
+              <td><%= transfer.fromnominal.try(:code) %></td>
+              <td><%= transfer.todetails %></td>
+
+              <% if !transfer.tobank_id.nil? %>
+                <td><%= transfer.tobank.try(:code) %></td>
+              <% else %>
+                <td></td>
+              <% end %>
+              
+              <td><%= transfer.tocase.try(:reference) %></td>
+              <td><%= transfer.tonominal.try(:code) %></td>
+              
+              <%= render_transpecific_data_for transfer %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <br>
+      <%= link_to 'New Client to Client Transfer - No Bank Change', new_transfers_cco_path, class: "btn btn-small btn-success" %>
+      <br>
+      <%= link_to 'New Client to Client Transfer (Change in Bank Accounts)', new_transfers_ccb_path, class: "btn btn-small btn-success" %>
+      <br>
+      <%= link_to 'New Client Side to Case Side Transfer', new_transfers_cmb_path, class: "btn btn-small btn-success" %>
+      <br><br>
+      <%= link_to 'New Case to Case Transfer - No Bank Change', new_transfers_mmo_path, class: "btn btn-small btn-success" %>
+      <br>
+      <%= link_to 'New Case to Case Transfer (Change in Bank Accounts)', new_transfers_mmb_path, class: "btn btn-small btn-success" %>
+      <br>
+      <%= link_to 'New Case Side to Client Side Transfer', new_transfers_mcb_path, class: "btn btn-small btn-success" %>
+      <br>
+      <br>
+      <%= link_to 'Transfer to Write Off Outlay', new_transfers_mno_path, class: "btn btn-small btn-success" %>
+      <br>
+      <%= link_to 'Transfer to Case from Nominal', new_transfers_nmo_path, class: "btn btn-small btn-success" %>
+      
+
+    </div>
+  </div>
+</div>
+
