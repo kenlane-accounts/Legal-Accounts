@@ -1,0 +1,37 @@
+<div class='container uic-main-border' >
+  <div class='coontainer-fluid'>
+
+    <div class="row">
+      <div class="col-sm-12 text-xs-center bootstrap-welcome">
+        <h1>Client Payments and Receipts</h1>
+      </div>
+    </div>
+    
+    <div class="table-responsive" style="float:left; margin-right: 15px;">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th><small>Bank</small></th>
+            <th><small>Cheque No.</small></th>
+            <th><small>Date</small></th>
+            <th style="width: 350px;"><small>Details</small></th>
+            <th><small>Case</small></th>
+            <th><small>Total Amount</small></th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <%= render partial: 'tranheadclient', collection: @tranhead %>
+        </tbody>
+
+      </table>
+    </div>  
+  </div>
+</div>
+<br>
+<div>
+  <%= link_to 'New Client Payment', new_tranheadclients_cpmat_path, class: "btn btn-small btn-success" %>
+</div>
+<div>
+  <%= link_to 'New Client Receipt', new_tranheadclients_crmat_path, class: "btn btn-small btn-success" %>
+</div>

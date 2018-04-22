@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  type: 
+  date: 2018-03-18
+  reference: MyString
+  amount: 9.99
+  fromdetails: MyString
+  frombank_id: 
+  fromnominal_id: 
+  todetails: MyString
+  tobank_id: 
+  tonominal_id: 
+
+two:
+  type: 
+  date: 2018-03-18
+  reference: MyString
+  amount: 9.99
+  fromdetails: MyString
+  frombank_id: 
+  fromnominal_id: 
+  todetails: MyString
+  tobank_id: 
+  tonominal_id: 

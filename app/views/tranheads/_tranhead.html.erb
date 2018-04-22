@@ -1,5 +1,28 @@
-<tr>
-  <td><%= tranhead.trref %></td>
-  <td><%= tranhead.trdate %></td>
-  <%= render_specific_data_for tranhead %>
-</tr>
+<% tranhead.trans.each_with_index do |ptran, i| %>
+  <tr>
+    <% if i==0 %>
+      <td><%= tranhead.bank.code %></td>
+      <td><%= tranhead.trref %></td>
+      <td><%= tranhead.trdate %></td>
+    <% else %>
+      <td></td>
+      <td></td>
+      <td></td>
+    <% end %>
+    
+    <td><%= ptran.trdetails %></td>
+    <td><%= ptran.case.try(:reference) %></td>
+    <td><%= ptran.supplier.try(:supcode) %></td>
+    <td><%= ptran.nominal.try(:code) %></td>
+    <td><%= ptran.vat.try(:vatcode) %></td>
+    <td><%= ptran.try(:vatperc) %></td>
+    <td><%= ptran.try(:vatamount) %></td>
+    <td><%= ptran.try(:netamount) %></td>
+    <td><%= ptran.tramount %></td>
+
+    <% if i==0 %>
+      <%= render_specific_data_for tranhead %>
+    <% end %>
+  
+  </tr>  
+<% end %>

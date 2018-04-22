@@ -1,18 +1,59 @@
 Rails.application.routes.draw do
+  root 'pages#home'
+
+  resources :outlaytypes
+  resources :cases
+  resources :cases
+  resources :clients
+  resources :casestatuses
+  resources :clientstatuses
   resources :suppliers
   resources :vats
   resources :nomtrans
   resources :nominals
-  # resources :tranheads do
-  #   resources :opnoms, controller: :trans, type: 'Opnom'
-  #   resources :opsups, controller: :trans, type: 'Opsup'   
-  #   resources :opdisbs, controller: :trans, type: 'Opdisp'
-  # end 
+
+  resources :transfers
+  namespace :transfers, only: [:show, :destroy] do
+    resources :ccbs, only: [:new, :create, :edit, :update]
+    resources :ccos, only: [:new, :create, :edit, :update]
+    resources :mmbs, only: [:new, :create, :edit, :update]
+    resources :mmos, only: [:new, :create, :edit, :update]
+    resources :mcbs, only: [:new, :create, :edit, :update]
+    resources :cmbs, only: [:new, :create, :edit, :update]
+    resources :mnos, only: [:new, :create, :edit, :update]
+    resources :nmos, only: [:new, :create, :edit, :update]
+  end 
+
   resources :tranheads 
   namespace :tranheads, only: [:show, :destroy] do
     resources :opsups, only: [:new, :create, :edit, :update]
     resources :opnoms, only: [:new, :create, :edit, :update]
+    resources :opmats, only: [:new, :create, :edit, :update]
+    resources :ornoms, only: [:new, :create, :edit, :update]
+    resources :orsups, only: [:new, :create, :edit, :update]
+    resources :ormats, only: [:new, :create, :edit, :update]
   end 
+
+  resources :tranheadclients
+  namespace :tranheadclients, only: [:show, :destroy] do
+    resources :cpmats, only: [:new, :create, :edit, :update]
+    resources :crmats, only: [:new, :create, :edit, :update]
+  end 
+
+  resources :tranheadpinvs
+  namespace :tranheadpinvs, only: [:show, :destroy] do
+    resources :pimats, only: [:new, :create, :edit, :update]
+    resources :pcmats, only: [:new, :create, :edit, :update]
+    resources :pinoms, only: [:new, :create, :edit, :update]
+    resources :pcnoms, only: [:new, :create, :edit, :update]
+  end 
+
+  resources :tranheadsinvs
+  namespace :tranheadsinvs, only: [:show, :destroy] do
+    resources :simats, only: [:new, :create, :edit, :update]
+    resources :scmats, only: [:new, :create, :edit, :update]
+  end 
+
   resources :trans
 
   # The priority is based upon order of creation: first created -> highest priority.

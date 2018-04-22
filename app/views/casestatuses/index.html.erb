@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Casestatuses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @casestatuses.each do |casestatus| %>
+      <tr>
+        <td><%= casestatus.code %></td>
+        <td><%= casestatus.description %></td>
+        <td><%= link_to 'Show', casestatus %></td>
+        <td><%= link_to 'Edit', edit_casestatus_path(casestatus) %></td>
+        <td><%= link_to 'Destroy', casestatus, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Casestatus', new_casestatus_path %>

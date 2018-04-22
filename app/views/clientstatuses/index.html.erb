@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Clientstatuses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Code</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clientstatuses.each do |clientstatus| %>
+      <tr>
+        <td><%= clientstatus.code %></td>
+        <td><%= clientstatus.description %></td>
+        <td><%= link_to 'Show', clientstatus %></td>
+        <td><%= link_to 'Edit', edit_clientstatus_path(clientstatus) %></td>
+        <td><%= link_to 'Destroy', clientstatus, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Clientstatus', new_clientstatus_path %>

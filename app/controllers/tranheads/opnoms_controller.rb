@@ -3,7 +3,7 @@ class Tranheads::OpnomsController < ApplicationController
   
   def new
     @i=0
-    @tranhead = Tranheads::Nominal.new
+    @tranhead = Tranheads::Bank.new
     @tranhead.trans << Tranopnom.new
   end
   
@@ -13,7 +13,7 @@ class Tranheads::OpnomsController < ApplicationController
     respond_to do |format|
 
       if @tranhead.save
-        format.html { redirect_to tranhead_path(@tranhead), notice: 'Tranhead was successfully created.' }
+        format.html { redirect_to tranheads_path, notice: 'Payment was successfully created.' }
         format.json { render :show, status: :created, location: @tranhead }
       else
         format.html { render :new }
@@ -23,12 +23,19 @@ class Tranheads::OpnomsController < ApplicationController
   end
 
   def edit
+     @tranhead.trans.each do |item|
+        item.netamount=item.netamount*-1
+        item.tramount=item.tramount*-1
+        if !item.vatamount.nil?
+          item.vatamount=item.vatamount*-1
+        end
+    end 
   end
 
   def update
     respond_to do |format|
       if @tranhead.update(tranhead_params)
-        format.html { redirect_to tranhead_path(@tranhead), notice: 'Tranhead was successfully updated.' }
+        format.html { redirect_to tranheads_path, notice: 'Payment was successfully updated.' }
         format.json { render :show, status: :ok, location: @tranhead }
       else
         format.html { render :edit }
@@ -45,9 +52,9 @@ class Tranheads::OpnomsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def tranhead_params
-      params.require(:tranheads_nominal).permit(:trref, :trdate, :bank_id, :type, 
+      params.require(:tranheads_bank).permit(:trref, :trdate, :bank_id, :type, 
         trans_attributes: [:trdetails, :tramount, :id, :nominal_id, 
-            :vat_id, :vatperc, :vatamount, :netamount, :type])
+            :vat_id, :vatperc, :vatamount, :netamount, :type, :thirdp, :_destroy])
 
     end
 end

@@ -1,0 +1,25 @@
+<div class="nested-fields">
+    <%= f.input :type, :as => :hidden %>
+    <div class="row">
+        <div class="col-sm-1">
+            <%= f.association :case, label_method: :reference, label: "Case", value_method: :id %>  
+        </div>
+        <div class="col-sm-2">
+          <%= f.input :trdetails, label: "Description" %>
+        </div>
+        <div class="col-sm-1">
+          <%= f.input :tramount, label: "Amount"%>
+        </div>
+        <div class="col-sm-1">
+            <%= f.association :outlaytype, label_method: :outcode, label: "Outlay Code", value_method: :id %>  
+        </div>
+        <div class="col-sm-2">
+          <%= f.input :thirdp, label: "Include in 3rd Party Returns"%>
+        </div>
+        <% if @i==1 %>
+            <div class="col-md-1">
+                <%= link_to_remove_association button_tag('Remove Line', type: "button"), f %>
+            </div>
+        <% end %>
+    </div>
+</div>

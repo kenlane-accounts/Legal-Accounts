@@ -40,6 +40,7 @@ class NominalsController < ApplicationController
   # PATCH/PUT /nominals/1
   # PATCH/PUT /nominals/1.json
   def update
+    params['nominal'].delete('code')      # Do not want to be able to change nominal values in the edit .....
     respond_to do |format|
       if @nominal.update(nominal_params)
         format.html { redirect_to @nominal, notice: 'Nominal was successfully updated.' }

@@ -1,0 +1,144 @@
+<br>
+<div class='container uic-main-border' >
+  <div class='coontainer-fluid'>
+
+    <div class="row">
+      <div class="col-sm-12 text-xs-center bootstrap-welcome">
+        <h1>Ledger Card for <%= @case.reference %> </h1>
+      </div>
+    </div>
+    
+    <p id="notice"><%= notice %></p>
+
+    <p>
+      <strong>Client:</strong>
+      <%= @case.client.firstname %> <%= @case.client.middlename %> <%= @case.client.lastname %>
+    </p>
+    <p>
+      <strong>Reference:</strong>
+      <%= @case.reference %>
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp
+      <strong>Description:</strong>
+      <%= @case.description %>
+
+    </p>
+
+    <br>
+    
+    <div class="table-responsive" style="float:left; margin-right: 15px;">
+      <table class="table table-bordered">
+      
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Ref</th>
+            <th>Details</th>
+            <th>Office Billing</th>
+            <th>Office Outlay</th>
+            <th>Client AC</th>
+            <th></th>
+          </tr>
+        </thead>
+        
+        <% _btot=0 %>      
+        <% _otot=0 %>      
+        <% _ctot=0 %>      
+
+        <tbody>
+          <% @lc.each do |thead| %>
+            <% thead.trans.each do |tline| %>
+              <tr>
+                <td><%= thead.trdate %></td>
+                <td><%= thead.trref %></td>
+                <td><%= tline.trdetails %></td>
+      
+                <% if thead.troffcli=="S" %>
+                  <td><%= tline.tramount %></td>
+                  <% _btot=_btot+tline.tramount %>      
+                <% else %>
+                  <% if thead.troffcli=="O" and thead.trpayrec=="R" and tline.troutlaybill!='Outlay' %>
+                    <td><%= tline.tramount %></td>
+                    <% _btot=_btot+tline.tramount %>      
+                  <% else %>
+                    <td></td>
+                  <% end %>
+                <% end %>
+      
+                <% if (thead.troffcli=="O" and thead.trpayrec=="P") or (thead.troffcli=="O" and thead.trpayrec=="R" and tline.troutlaybill=='Outlay') %>
+                  <td><%= tline.tramount %></td>
+                  <% _otot=_otot+tline.tramount %>      
+                <% else %>
+                  <% if thead.troffcli=="S" %>
+                    <td><%= tline.outamount %></td>
+                    <% _otot=_otot+tline.tramount %>      
+                <% else %>
+                    <% if thead.troffcli=="P" %>
+                      <td><%= tline.tramount*-1 %></td>
+                      <% _otot=_otot+tline.tramount %>      
+                    <% else %>
+                      <td></td>
+                    <% end %>
+                  <% end %>
+                <% end %>
+      
+                <% if thead.troffcli=="C" %>
+                  <td><%= tline.tramount %></td>
+                  <% _ctot=_ctot+tline.tramount %>      
+                <% else %>
+                  <td></td>
+                <% end %>
+                
+                <% if thead.trpayrec=='P' %>
+                  <% if thead.transfer_id.nil? %>
+                    <td>Payment</td>
+                  <% else %>
+                    <td>Transfer Out</td>
+                  <% end %>
+                <% else %>
+                  <% if thead.trpayrec=='R' %>
+                    <% if thead.transfer_id.nil? %>
+                      <td>Receipt</td>
+                    <% else %>
+                      <td>Transfer In</td>
+                    <% end %>
+                  <% else %>
+                    <% if thead.trpayrec=='I' %>
+                      <% if thead.troffcli=='S' %>
+                        <td>Sales Invoice</td>
+                      <% else %>
+                        <td>Purchase Invoice</td>
+                      <% end %>
+                    <% else %>
+                      <% if thead.troffcli=='S' %>
+                        <td>Sales Credit Note</td>
+                      <% else %>
+                        <td>Purchase Credit Note</td>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                <% end %>
+                
+      
+              </tr>
+            <% end %>
+          <% end %>
+
+          <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th> <%= _btot unless _btot==0 %> </th>
+            <th> <%= _otot unless _otot==0 %></th>
+            <th> <%= _ctot unless _ctot==0 %> </th>
+            <th></th>
+          </tr>
+
+        </tbody>
+      </table>
+      
+    </div>
+
+  </div>
+</div>
+<br>
+<%= link_to 'Back', cases_path, class: "btn btn-small btn-success"  %>

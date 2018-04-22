@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @transfer.type %>
+</p>
+
+<p>
+  <strong>Date:</strong>
+  <%= @transfer.date %>
+</p>
+
+<p>
+  <strong>Reference:</strong>
+  <%= @transfer.reference %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @transfer.amount %>
+</p>
+
+<p>
+  <strong>Fromdetails:</strong>
+  <%= @transfer.fromdetails %>
+</p>
+
+<p>
+  <strong>Frombank:</strong>
+  <%= @transfer.frombank %>
+</p>
+
+<p>
+  <strong>Fromnominal:</strong>
+  <%= @transfer.fromnominal %>
+</p>
+
+<p>
+  <strong>Todetails:</strong>
+  <%= @transfer.todetails %>
+</p>
+
+<p>
+  <strong>Tobank:</strong>
+  <%= @transfer.tobank %>
+</p>
+
+<p>
+  <strong>Tonominal:</strong>
+  <%= @transfer.tonominal %>
+</p>
+
+<%= link_to 'Edit', edit_transfer_path(@transfer) %> |
+<%= link_to 'Back', transfers_path %>

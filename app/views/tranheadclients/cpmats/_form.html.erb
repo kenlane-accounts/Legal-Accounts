@@ -1,0 +1,65 @@
+      <div class="panel panel-primary" >
+        <div class="panel-heading epa_heading epa_panel" > Client Payment <i class="fa fa-bars pull-right epa_icon rotate2" aria-hidden="true"></i></div>
+          <div class="panel-body epa_body epa_panel_body">
+
+            <%= f.error_notification %>
+
+            <div class="form-group form-group-sm">
+              <span style="color:red">
+                <% f.object.errors[:base].each do |key, value| %>
+                <div>
+                  <%= key %>
+                </div>
+                <% end %>
+              </span>
+            </div>
+
+            <%= f.input :type, :as => :hidden %>
+            <%= f.input :sumtramount, :as => :hidden %>
+
+            <div class="form-group form-group-sm">
+              <div class="row">
+                <div class="col-sm-2">
+                  <%= f.association :bank, label_method: :desc, label: "Select Bank Account"%>
+                </div>
+              </div>
+            </div>
+
+            <% if @tranhead.askoverdraw or @tranhead.overdraw=="1"  %>
+              <div class="form-group form-group-sm">
+                <div class="row">
+                  <div class="col-sm-6">
+                      <%= f.input :overdraw, :as => :boolean, label: "Overdraw this Bank Account" %> 
+                  </div>
+                </div>
+              </div>
+            <% end %>
+
+            <div class="form-group form-group-sm">
+              <div class="row">
+                <div class="col-sm-1">
+                  <%= f.input :trref, label: "Reference" %>
+                </div>
+                <div class="col-sm-4">
+                  <%= f.input :trdate, label: "Transaction Date", order: [:day, :month, :year] %>
+                </div>
+              </div>
+            </div>
+
+              <%= f.simple_fields_for :trans, as: :trancpmat do |p| %>
+                <%= render 'fields', f: p %>
+                <% @i = 1 %>
+              <% end %>
+
+              <div class="links">
+                <%= link_to_add_association button_tag('Add Line', type: "button"), f, :trans, :partial => 'fields',  
+                wrap_object: Proc.new { |tran| tran.type = 'Trancpmat'; tran } %>
+              </div>    
+            
+          </div>
+          <div class="panel-footer">
+            <%= f.submit 'Save', class: 'btn btn-primary' %>
+            <%= link_to 'Cancel', tranheadclients_path, class: 'btn btn-primary', :data => {:confirm => 'Are you sure you want to cancel?'} %>
+          </div>
+        </div>
+      </div>

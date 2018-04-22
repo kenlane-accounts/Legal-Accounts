@@ -1,0 +1,49 @@
+<br>
+<div class='container uic-main-border' >
+  <div class='container-fluid'>
+
+    <p id="notice"><%= notice %></p>
+
+    <div class="row">
+      <div class="col-sm-12 text-xs-center bootstrap-welcome">
+        <h1>Case List</h1>
+      </div>
+    </div>
+    
+    <div class="table-responsive" style="float:left; margin-right: 15px;">
+      <table class="table table-bordered">
+
+        <thead>
+          <tr>
+            <th>Reference</th>
+            <th>Description</th>
+            <th>Client</th>
+            <th>Status</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          <% @cases.each do |dcase| %>
+            <tr>
+              <td><%= dcase.reference %></td>
+              <td><%= dcase.description %></td>
+              <td><%= dcase.client.firstname %> <%= dcase.client.middlename %> <%= dcase.client.lastname %></td>
+              <td><%= dcase.casestatus.code %></td>
+              <td><%= link_to 'Ledger Card', dcase %></td>
+              <td><%= link_to 'Edit Case', edit_case_path(dcase) %></td>
+              <td><%= link_to 'Delete Case', dcase, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+          <% end %>
+        </tbody>
+
+      </table>
+    </div>  
+  </div>
+</div>
+<br>
+<div>
+  <%= link_to 'New Case', new_case_path, class: "btn btn-small btn-success" %>
+</div>
+
+
