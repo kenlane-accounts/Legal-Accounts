@@ -1,4 +1,4 @@
-class CreateCases < ActiveRecord::Migration
+class CreateMatters < ActiveRecord::Migration
   def change
     create_table :matters do |t|
       t.string :reference

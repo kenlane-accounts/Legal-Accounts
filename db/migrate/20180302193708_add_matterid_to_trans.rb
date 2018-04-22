@@ -1,4 +1,4 @@
-class AddCaseidToTrans < ActiveRecord::Migration
+class AddMatteridToTrans < ActiveRecord::Migration
   def change
     add_reference :trans, :matter, index: true, foreign_key: true
   end

@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20180421174858) do
     t.integer  "nominal_id"
     t.date     "date"
     t.decimal  "amount"
+    t.string   "type"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "ttype"
