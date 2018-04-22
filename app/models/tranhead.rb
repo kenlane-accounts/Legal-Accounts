@@ -8,6 +8,8 @@ class Tranhead < ActiveRecord::Base
 
     accepts_nested_attributes_for :trans, :reject_if => :all_blank, allow_destroy: true
 
+    default_scope { where(company_id: Company.current_company_id) }
+
     @cnt='1'
 
     after_save do

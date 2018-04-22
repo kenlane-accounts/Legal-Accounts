@@ -13,6 +13,8 @@ class Nominal < ActiveRecord::Base
   validates_presence_of :code 
   validates_presence_of :desc
 
+   default_scope { where(company_id: Company.current_company_id) }
+
   def banksel
      if self.isclient
       "Client Bank - #{code}"

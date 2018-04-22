@@ -6,6 +6,7 @@ class Client < ActiveRecord::Base
   validates_presence_of :lastname
   validates_presence_of :clientstatus
 
+  default_scope { where(company_id: Company.current_company_id) }
 
   def info
       "#{firstname}  #{middlename}  #{lastname}"

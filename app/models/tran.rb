@@ -14,4 +14,5 @@ class Tran < ActiveRecord::Base
   attr_accessor :clientoverdraw
   attr_accessor :origamount                      # This is the original amount  (Need for checking if balance<0 for client account on the EDIT)
 
+  default_scope { where(company_id: Company.current_company_id) }
 end

@@ -11,4 +11,5 @@ class Case < ActiveRecord::Base
   validates_presence_of :description
   validates_presence_of :casestatus
 
+  default_scope { where(company_id: Company.current_company_id) }
 end

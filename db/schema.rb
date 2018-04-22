@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180327184252) do
+ActiveRecord::Schema.define(version: 20180421174858) do
 
   create_table "cases", force: :cascade do |t|
     t.string   "reference"
@@ -20,10 +20,12 @@ ActiveRecord::Schema.define(version: 20180327184252) do
     t.integer  "casestatus_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.integer  "company_id"
   end
 
   add_index "cases", ["casestatus_id"], name: "index_cases_on_casestatus_id"
   add_index "cases", ["client_id"], name: "index_cases_on_client_id"
+  add_index "cases", ["company_id"], name: "index_cases_on_company_id"
 
   create_table "casestatuses", force: :cascade do |t|
     t.string   "code"
@@ -39,9 +41,11 @@ ActiveRecord::Schema.define(version: 20180327184252) do
     t.integer  "clientstatus_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "company_id"
   end
 
   add_index "clients", ["clientstatus_id"], name: "index_clients_on_clientstatus_id"
+  add_index "clients", ["company_id"], name: "index_clients_on_company_id"
 
   create_table "clientstatuses", force: :cascade do |t|
     t.string   "code"
@@ -58,7 +62,10 @@ ActiveRecord::Schema.define(version: 20180327184252) do
     t.boolean  "isdeposit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "company_id"
   end
+
+  add_index "nominals", ["company_id"], name: "index_nominals_on_company_id"
 
   create_table "nomtrans", force: :cascade do |t|
     t.integer  "tran_id"
@@ -73,9 +80,11 @@ ActiveRecord::Schema.define(version: 20180327184252) do
     t.string   "nomcode"
     t.integer  "tranhead_id"
     t.integer  "case_id"
+    t.integer  "company_id"
   end
 
   add_index "nomtrans", ["case_id"], name: "index_nomtrans_on_case_id"
+  add_index "nomtrans", ["company_id"], name: "index_nomtrans_on_company_id"
   add_index "nomtrans", ["nominal_id"], name: "index_nomtrans_on_nominal_id"
   add_index "nomtrans", ["supplier_id"], name: "index_nomtrans_on_supplier_id"
   add_index "nomtrans", ["tran_id"], name: "index_nomtrans_on_tran_id"
@@ -94,7 +103,10 @@ ActiveRecord::Schema.define(version: 20180327184252) do
     t.string   "supname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "company_id"
   end
+
+  add_index "suppliers", ["company_id"], name: "index_suppliers_on_company_id"
 
   create_table "tranheads", force: :cascade do |t|
     t.string   "trref"
@@ -111,11 +123,13 @@ ActiveRecord::Schema.define(version: 20180327184252) do
     t.integer  "transfer_id"
     t.integer  "case_id_id"
     t.integer  "case_id"
+    t.integer  "company_id"
   end
 
   add_index "tranheads", ["bank_id"], name: "index_tranheads_on_bank_id"
   add_index "tranheads", ["case_id"], name: "index_tranheads_on_case_id"
   add_index "tranheads", ["case_id_id"], name: "index_tranheads_on_case_id_id"
+  add_index "tranheads", ["company_id"], name: "index_tranheads_on_company_id"
   add_index "tranheads", ["supplier_id"], name: "index_tranheads_on_supplier_id"
   add_index "tranheads", ["transfer_id"], name: "index_tranheads_on_transfer_id"
   add_index "tranheads", ["troffcli"], name: "index_tranheads_on_troffcli"
@@ -141,9 +155,11 @@ ActiveRecord::Schema.define(version: 20180327184252) do
     t.decimal  "outamount",         precision: 10, scale: 2
     t.integer  "fromclientbank_id"
     t.integer  "case_id"
+    t.integer  "company_id"
   end
 
   add_index "trans", ["case_id"], name: "index_trans_on_case_id"
+  add_index "trans", ["company_id"], name: "index_trans_on_company_id"
   add_index "trans", ["fromclientbank_id"], name: "index_trans_on_fromclientbank_id"
   add_index "trans", ["nominal_id"], name: "index_trans_on_nominal_id"
   add_index "trans", ["outlaytype_id"], name: "index_trans_on_outlaytype_id"
@@ -169,8 +185,10 @@ ActiveRecord::Schema.define(version: 20180327184252) do
     t.string   "trantype"
     t.integer  "fromcase_id"
     t.integer  "tocase_id"
+    t.integer  "company_id"
   end
 
+  add_index "transfers", ["company_id"], name: "index_transfers_on_company_id"
   add_index "transfers", ["frombank_id"], name: "index_transfers_on_frombank_id"
   add_index "transfers", ["fromcase_id"], name: "index_transfers_on_fromcase_id"
   add_index "transfers", ["fromnominal_id"], name: "index_transfers_on_fromnominal_id"

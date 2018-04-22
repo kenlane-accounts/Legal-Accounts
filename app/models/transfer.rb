@@ -15,4 +15,5 @@ class Transfer < ActiveRecord::Base
 
   validates_numericality_of :amount, :greater_than_or_equal_to => 0.01
 
+  default_scope { where(company_id: Company.current_company_id) }
 end
