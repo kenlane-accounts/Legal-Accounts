@@ -39,7 +39,7 @@ class Tranheads::Bank < Tranhead
             if !tr.case_id.nil?
                 if !tr.tramount.nil?
                     if !tr.fromclientbank.nil?
-                        tclbal=Nomtran.where('case_id='+tr.case_id.to_s+' and nomcode="CLIENT"').sum(:amount)
+                        tclbal=Nomtran.where(case_id: tr.case_id, nomcode: "CLIENT").sum(:amount)
                         if tclbal.nil?
                            tclbal=0 
                         end

@@ -117,6 +117,7 @@ ActiveRecord::Schema.define(version: 20180421174858) do
     t.date     "trdate"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "bank_id"
     t.string   "type"
     t.string   "troffcli"
     t.string   "trpayrec"
@@ -138,21 +139,22 @@ ActiveRecord::Schema.define(version: 20180421174858) do
 
   create_table "trans", force: :cascade do |t|
     t.string   "trdetails"
-    t.decimal  "tramount",      precision: 15, scale: 2
+    t.decimal  "tramount",          precision: 15, scale: 2
     t.integer  "tranhead_id"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.integer  "nominal_id"
     t.integer  "vat_id"
-    t.decimal  "vatperc",       precision: 15, scale: 2
-    t.decimal  "vatamount",     precision: 15, scale: 2
-    t.decimal  "netamount",     precision: 15, scale: 2
+    t.decimal  "vatperc",           precision: 15, scale: 2
+    t.decimal  "vatamount",         precision: 15, scale: 2
+    t.decimal  "netamount",         precision: 15, scale: 2
     t.integer  "supplier_id"
     t.string   "type"
     t.boolean  "thirdp"
     t.integer  "outlaytype_id"
     t.string   "troutlaybill"
-    t.decimal  "outamount",     precision: 10, scale: 2
+    t.decimal  "outamount",         precision: 10, scale: 2
+    t.integer  "fromclientbank_id"
     t.integer  "case_id"
     t.integer  "company_id"
   end
@@ -169,11 +171,15 @@ ActiveRecord::Schema.define(version: 20180421174858) do
     t.string   "type"
     t.date     "date"
     t.string   "reference"
-    t.decimal  "amount",      precision: 15, scale: 2
+    t.decimal  "amount",         precision: 15, scale: 2
     t.string   "fromdetails"
+    t.integer  "frombank_id"
+    t.integer  "fromnominal_id"
     t.string   "todetails"
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+    t.integer  "tobank_id"
+    t.integer  "tonominal_id"
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.string   "fromtype"
     t.string   "totype"
     t.string   "trantype"
@@ -183,6 +189,10 @@ ActiveRecord::Schema.define(version: 20180421174858) do
   end
 
   add_index "transfers", ["company_id"], name: "index_transfers_on_company_id", using: :btree
+  add_index "transfers", ["frombank_id"], name: "index_transfers_on_frombank_id", using: :btree
+  add_index "transfers", ["fromnominal_id"], name: "index_transfers_on_fromnominal_id", using: :btree
+  add_index "transfers", ["tobank_id"], name: "index_transfers_on_tobank_id", using: :btree
+  add_index "transfers", ["tonominal_id"], name: "index_transfers_on_tonominal_id", using: :btree
 
   create_table "vats", force: :cascade do |t|
     t.decimal  "vatperc"

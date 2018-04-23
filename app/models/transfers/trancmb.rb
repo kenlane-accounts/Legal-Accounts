@@ -1,7 +1,7 @@
 class Transfers::Trancmb < Transfer
 
-  belongs_to :frombank, -> {where 'isclient="t"'}, :class_name => 'Nominal'
-  belongs_to :tobank, -> {where 'isoffice="t"'}, :class_name => 'Nominal'
+  belongs_to :frombank, -> {where 'isclient=\'t\''}, :class_name => 'Nominal'
+  belongs_to :tobank, -> {where 'isoffice=\'t\''}, :class_name => 'Nominal'
 
   validates_presence_of :fromcase
   validates_presence_of :tocase

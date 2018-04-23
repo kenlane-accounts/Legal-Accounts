@@ -44,7 +44,7 @@ class Tranheads::Nobank < Tranhead
                                torigsum=torigsum.abs 
                             end
                         end
-                        tclbal=Nomtran.where('case_id='+tr.case_id.to_s+' and nomcode="CLIENT"').sum(:amount)
+                        tclbal=Nomtran.where(case_id: tr.case_id, nomcode: 'CLIENT').sum(:amount)
                         if tclbal.nil?
                            tclbal=0 
                         end
