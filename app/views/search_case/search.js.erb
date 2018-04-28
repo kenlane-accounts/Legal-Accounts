@@ -1,0 +1,8 @@
+var cases_div = $('#search_case_modal').find('.cases');
+cases_div.html('');
+var table = $('<table  class="table"><tr><th>Reference</th><th>Client</th><th>Status</th></tr></table>');
+<% @cases.each do |c| %>
+  var row = $('<tr><td><%= link_to c.reference, c %></td><td><%= c.client.info %></td><td><%= c.casestatus.code %></td></tr>');
+  table.append(row);
+<% end %>
+cases_div.append(table);

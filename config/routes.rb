@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   root 'pages#home'
 
   resources :outlaytypes
-  resources :cases
-  resources :cases
+  resources :cases do
+    get :autocomplete_case_reference, on: :collection
+  end
+
   resources :clients
   resources :casestatuses
   resources :clientstatuses
@@ -55,6 +57,8 @@ Rails.application.routes.draw do
   end 
 
   resources :trans
+
+  post 'search_case/search'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

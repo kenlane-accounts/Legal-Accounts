@@ -1,0 +1,22 @@
+<div id="search_case_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="search_case_Label">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="search_case_Label">Search</h4>
+      </div>
+
+      <div class="modal-body">
+        <%= form_tag search_case_search_path, { remote: true, class: 'form-inline' } do %>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label">Case Search</label>
+            <%= autocomplete_field_tag :search_case_reference, '', autocomplete_case_reference_cases_path,
+                                       append_to: "#search_case_modal", class: 'form-control' %>
+          </div>
+          <%= submit_tag "Search", class: 'btn' %>
+        <% end %>
+        <div class="cases"></div>
+      </div>
+    </div>
+  </div>
+</div>

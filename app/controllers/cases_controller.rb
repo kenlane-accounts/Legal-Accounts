@@ -1,6 +1,8 @@
 class CasesController < ApplicationController
   before_action :set_case, only: [:show, :edit, :update, :destroy]
 
+  autocomplete :case, :reference, full: true
+
   # GET /cases
   # GET /cases.json
   def index

@@ -13,11 +13,10 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
+//= require jquery-ui/autocomplete
+//= require autocomplete-rails
+//= require accounts
 //= require_tree .
 //= require bootstrap
 //= require cocoon
 //= require turbolinks
-
-
-
-
