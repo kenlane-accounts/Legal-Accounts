@@ -10,7 +10,7 @@
         <%= form_tag search_case_search_path, { remote: true, class: 'form-inline' } do %>
           <div class="form-group">
             <label for="recipient-name" class="control-label">Case Search</label>
-            <%= autocomplete_field_tag :search_case_reference, '', autocomplete_case_reference_cases_path,
+            <%= autocomplete_field_tag :search_case_term, '', autocomplete_case_reference_cases_path,
                                        append_to: "#search_case_modal", class: 'form-control' %>
           </div>
           <%= submit_tag "Search", class: 'btn' %>
