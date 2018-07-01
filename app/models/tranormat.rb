@@ -1,5 +1,7 @@
 class Tranormat < Tran
 
+  has_many :allocations, foreign_key: 'receipt_tran_id'
+
   validates_presence_of :trdetails
   validates_presence_of :tramount
   validates_presence_of :case
@@ -42,4 +44,7 @@ class Tranormat < Tran
 
   end
 
+  def allocated
+    allocations.sum(:amount)
+  end
 end 

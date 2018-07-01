@@ -1,5 +1,6 @@
 class Transimat < Tran
 
+  has_many :allocations, foreign_key: 'invoice_tran_id'
   validates_presence_of :trdetails
   validates_presence_of :tramount
   validates_presence_of :nominal
@@ -46,6 +47,14 @@ class Transimat < Tran
                          case_id: tranhead.case_id, ttype: 'I', tran: self, nomcode: 'OUTLAY' })
       end
     end
+  end
+
+  def allocated
+    allocations.sum(:amount)
+  end
+
+  def to_alloc
+    tramount - allocated
   end
 
 end 

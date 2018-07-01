@@ -1,6 +1,6 @@
 <% tranhead.trans.each_with_index do |ptran, i| %>
   <tr>
-    <% if i==0 %>
+    <% if i == 0 %>
       <td><%= tranhead.bank.code %></td>
       <td><%= tranhead.trref %></td>
       <td><%= tranhead.trdate %></td>
@@ -9,7 +9,7 @@
       <td></td>
       <td></td>
     <% end %>
-    
+
     <td><%= ptran.trdetails %></td>
     <td><%= ptran.case.try(:reference) %></td>
     <td><%= ptran.supplier.try(:supcode) %></td>
@@ -20,9 +20,14 @@
     <td><%= ptran.try(:netamount) %></td>
     <td><%= ptran.tramount %></td>
 
-    <% if i==0 %>
+    <% if i == 0 %>
       <%= render_specific_data_for tranhead %>
     <% end %>
-  
-  </tr>  
+
+    <td>
+      <% if ptran.type == 'Tranormat' && ptran.troutlaybill == 'Billing' %>
+        <a href="#" role="button" data-toggle="modal" data-target="#allocationModal" data-id="<%= ptran.id %>" >Allocate</a>
+      <% end %>
+    </td>
+  </tr>
 <% end %>
