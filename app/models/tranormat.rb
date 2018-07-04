@@ -47,4 +47,8 @@ class Tranormat < Tran
   def allocated
     allocations.sum(:amount)
   end
+
+  def to_alloc
+    tramount - allocated
+  end
 end 

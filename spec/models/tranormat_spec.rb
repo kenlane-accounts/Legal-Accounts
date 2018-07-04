@@ -39,14 +39,14 @@ RSpec.describe Tranormat, type: :model do
     describe 'when allocation exists' do
       before { tranormat.save! }
       let!(:allocation) do
-        a = build :allocation, receipt_tran: tranormat
+        a = build :allocation, receipt_tran: tranormat, amount: 10
         a.invoice_tran.tranhead.update! case_id: tranormat.case_id
         a.save!
         a
       end
 
-      it 'returns allocation amount' do
-        expect(tranormat.allocated).to eq allocation.amount
+      it 'returns the rest' do
+        expect(tranormat.to_alloc).to eq 40
       end
     end
   end

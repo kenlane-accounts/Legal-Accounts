@@ -1,0 +1,30 @@
+<% allocation = f.object %>
+<tr>
+  <%= f.input :receipt_tran_id, as: :hidden %>
+  <%= f.input :invoice_tran_id, as: :hidden %>
+  <td><%= allocation.invoice_tran.tranhead.trdate %></td>
+  <td><%= allocation.invoice_tran.tranhead.trref %></td>
+  <td><%= allocation.invoice_tran.trdetails %></td>
+  <td><%= allocation.invoice_tran.nominal.code %></td>
+  <td><%= allocation.invoice_tran.tranhead.case.reference %></td>
+  <td><%= allocation.invoice_tran.tranhead.case.client.info %></td>
+  <td><%= allocation.invoice_tran.netamount %></td>
+  <td><%= allocation.invoice_tran.outamount %></td>
+  <td><%= allocation.invoice_tran.tramount %></td>
+  <td class="to_alloc" data-invoice-id="<%= allocation.invoice_tran.id %>"><%= allocation.invoice_tran.to_alloc %></td>
+  <td>
+    <div class="input-group">
+      <%= f.input :amount, label: false, input_html: {
+          class: 'allocation_amount_input',
+          data: { 'invoice-id' => allocation.invoice_tran.id,
+                  'to-alloc' => allocation.invoice_tran.to_alloc }
+      }
+      %>
+      <span class="input-group-btn">
+        <%= button_tag '=', class: 'btn btn-default fill_allocation_amount', type: 'button',
+                       data: { 'invoice-id' => allocation.invoice_tran.id, 'to-alloc' => allocation.invoice_tran.to_alloc } %>
+      </span>
+    </div>
+  </td>
+  <td><%= allocation.invoice_tran.allocated %></td>
+</tr>

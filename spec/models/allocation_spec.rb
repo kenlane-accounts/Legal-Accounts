@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Allocation, type: :model do
+  before { Company.current_company_id = 1 }
   let(:allocation) { build :allocation }
   subject { allocation }
 
@@ -11,11 +12,6 @@ RSpec.describe Allocation, type: :model do
   it { is_expected.to respond_to :receipt_tran }
 
   it { is_expected.to be_valid }
-
-  it 'debug' do
-    a = 2
-    expect(a).to eq 3
-  end
 
   describe 'when receipt tran is not present' do
     before { allocation.receipt_tran_id = nil }
@@ -44,6 +40,50 @@ RSpec.describe Allocation, type: :model do
 
   describe 'when amount is 0' do
     before { allocation.amount = 0 }
+    it { is_expected.to_not be_valid }
+  end
+  describe 'when amount is nil' do
+    before { allocation.amount = nil }
+    it { is_expected.to_not be_valid }
+  end
+
+  describe 'when amount is not a number' do
+    before { allocation.amount = 'a' }
+    it { is_expected.to_not be_valid }
+  end
+
+  describe 'when amount is greater than invoice total' do
+    before { allocation.amount = allocation.invoice_tran.tramount + 0.01 }
+    it { is_expected.to_not be_valid }
+  end
+
+  describe 'when amount is greater than invoice not allocated amount' do
+    before do
+      allocation.receipt_tran.update! tramount: allocation.invoice_tran.tramount + 20 # make sure then receipt has enough amount
+      Allocation.create! receipt_tran: allocation.receipt_tran, invoice_tran: allocation.invoice_tran,
+                        amount: allocation.invoice_tran.tramount - 10
+      allocation.amount = 10.01
+    end
+    it 'has amount lesser than invoice total' do
+      expect(allocation.amount).to be < allocation.invoice_tran.tramount
+    end
+    it { is_expected.to_not be_valid }
+  end
+
+  describe 'when amount is greater than receipt total' do
+    before { allocation.amount = allocation.receipt_tran.tramount + 0.01 }
+    it { is_expected.to_not be_valid }
+  end
+
+  describe 'when amount is greater than receipt not allocated amount' do
+    before do
+      Allocation.create! receipt_tran: allocation.receipt_tran, invoice_tran: allocation.invoice_tran,
+                        amount: allocation.receipt_tran.tramount - 10
+      allocation.amount = 10.01
+    end
+    it 'has amount lesser than invoice total' do
+      expect(allocation.amount).to be < allocation.invoice_tran.tramount
+    end
     it { is_expected.to_not be_valid }
   end
 

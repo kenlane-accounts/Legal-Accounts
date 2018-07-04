@@ -1,0 +1,16 @@
+<% if object.errors.any? %>
+  <div class="alert alert-danger">
+    Your submission form contains <%= pluralize(object.errors.count, "error") %>.
+  </div>
+  <ul>
+    <% object.errors.each do |atr, msg| %>
+      <li>
+        <% if atr.to_s.include? "base" %>
+          <%= msg %>
+        <% else %>
+          <%= object.errors.full_message(atr, msg) %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

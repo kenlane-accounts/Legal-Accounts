@@ -1,0 +1,8 @@
+var error_explanation = $('#batch_allocation_errors');
+error_explanation.html(null);
+<% if @batch_allocation.errors.any? %>
+  error_explanation.html("<%= j render partial: 'shared/error_messages', locals: { object: @batch_allocation } %>");
+<% else %>
+  var modal = $('#allocationModal');
+  modal.modal('hide')
+<% end %>

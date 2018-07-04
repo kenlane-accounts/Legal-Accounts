@@ -7,7 +7,13 @@
     </div>
 
     <div class="modal-body">
-      <%= form_for @batch_allocation, url: allocations_path, html: { class: 'form-horizontal' } do |f| %>
+      <%= simple_form_for @batch_allocation, url: allocations_path, remote: true, html: { class: 'form-horizontal' } do |f| %>
+        <div id="batch_allocation_errors">
+          <%= render 'shared/error_messages', object: @batch_allocation %>
+        </div>
+
+        <%= f.input :receipt_tran_id, as: :hidden %>
+
         <div class="row">
           <div class="col-md-2">
             Amount Received
@@ -24,8 +30,13 @@
           <div class="col-md-2">
             Amount to Allocate
           </div>
-          <div class="col-md-2">
+          <div id="receipt_to_alloc" class="col-md-2" data-to-alloc="<%= @batch_allocation.receipt_tran.tramount - @batch_allocation.receipt_tran.allocated %>">
             <%= @batch_allocation.receipt_tran.tramount - @batch_allocation.receipt_tran.allocated %>
+          </div>
+          <div class="col-md-1">
+            <%= button_tag id: 'autoallocate', class: 'btn btn-default', type: 'button' do %>
+              <span class="glyphicon glyphicon-fullscreen"></span>
+            <% end %>
           </div>
         </div>
 
@@ -47,8 +58,11 @@
             <th>VAT</th>
           </tr>
           </thead>
-          <%= render partial: 'sales_invoice_tran', collection: @invoice_trans %>
+          <%= f.simple_fields_for :allocations do |a| %>
+            <%= render 'allocation', f: a %>
+          <% end %>
         </table>
+        <%= f.button :submit, 'Save', class: 'btn btn-primary' %>
       <% end %>
     </div>
 
