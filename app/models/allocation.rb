@@ -8,6 +8,8 @@ class Allocation < ActiveRecord::Base
   validate :billing_receipt
   validate :matching_of_cases
 
+  before_create :calculate_vat
+
   private
 
   def numericality_of_amount
@@ -38,5 +40,14 @@ class Allocation < ActiveRecord::Base
     if invoice_tran && (receipt_tran.try(:case_id) != invoice_tran.tranhead.try(:case_id))
       errors.add :receipt_tran_id, "Receipt Transaction case_id does not match Invoice case_id"
     end
+  end
+
+  def calculate_vat
+    not_alloc_out = (invoice_tran.outamount || 0) - invoice_tran.allocated
+    not_alloc_out = not_alloc_out < 0 ? 0.0 : not_alloc_out
+
+    vatable_amount = invoice_tran.outamount.nil? ? amount : amount - not_alloc_out
+    vatable_amount = vatable_amount < 0 ? 0.0 : vatable_amount
+    self.vat = vatable_amount - (vatable_amount * 100.0 / (100 + invoice_tran.vatperc))
   end
 end

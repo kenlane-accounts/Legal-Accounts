@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :vat do
     sequence(:vatcode) { |n| "vat#{n}" }
-    vatperc 12.0
+    vatperc 23.0
   end
 end
