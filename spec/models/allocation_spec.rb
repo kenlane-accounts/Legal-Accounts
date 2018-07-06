@@ -215,4 +215,45 @@ RSpec.describe Allocation, type: :model do
       end
     end
   end
+
+  describe '#can_delete?' do
+    describe 'when not saved' do
+      it { is_expected.to_not be_persisted }
+      it 'returns false' do
+        expect(allocation.can_delete?).to be_falsey
+      end
+    end
+
+    describe 'when not saved' do
+      before { allocation.save! }
+      describe 'when there are no other allocations' do
+        it 'returns true' do
+          expect(allocation.can_delete?).to be_truthy
+        end
+      end
+
+      describe 'when there are allocations not belonged to current invoice' do
+        before { create :allocation }
+        it 'returns true' do
+          expect(allocation.can_delete?).to be_truthy
+        end
+      end
+
+      describe 'when there are allocations belonged to current invoice' do
+        describe 'when they was created after current' do
+          before { create :allocation, invoice_tran_id: allocation.invoice_tran_id }
+          it 'returns false' do
+            expect(allocation.can_delete?).to be_falsey
+          end
+        end
+
+        describe 'when they was created before current' do
+          before { create :allocation, invoice_tran_id: allocation.invoice_tran_id, created_at: allocation.created_at - 1.day }
+          it 'returns true' do
+            expect(allocation.can_delete?).to be_truthy
+          end
+        end
+      end
+    end
+  end
 end

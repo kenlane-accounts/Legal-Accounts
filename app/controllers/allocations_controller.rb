@@ -1,4 +1,8 @@
 class AllocationsController < ApplicationController
+  def index
+    @allocations = Allocation.order(created_at: :desc)
+  end
+
   def new
     @batch_allocation = BatchAllocation.new receipt_tran_id: params[:receipt_tran_id]
     # @receipt_tran = Tranormat.find params[:receipt_tran_id]
@@ -12,6 +16,16 @@ class AllocationsController < ApplicationController
     respond_to do |format|
       format.js
     end
+  end
+
+  def destroy
+    @allocation = Allocation.find params[:id]
+    if @allocation.destroy
+      flash[:success] = "Successfully deleted"
+    else
+      flash[:error] = "Can not delete"
+    end
+    redirect_to allocations_path
   end
 
   private

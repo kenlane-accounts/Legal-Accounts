@@ -59,7 +59,7 @@
           </tr>
           </thead>
           <%= f.simple_fields_for :allocations do |a| %>
-            <%= render 'allocation', f: a %>
+            <%= render 'allocation_fields', f: a %>
           <% end %>
         </table>
         <%= f.button :submit, 'Save', class: 'btn btn-primary' %>

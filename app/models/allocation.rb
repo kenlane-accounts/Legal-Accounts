@@ -10,6 +10,17 @@ class Allocation < ActiveRecord::Base
 
   before_create :calculate_vat
 
+  before_destroy do
+    unless can_delete?
+      false
+    end
+  end
+
+  def can_delete?
+    return false unless persisted?
+    Allocation.where('invoice_tran_id = :invoice_tran_id and created_at > :created_at', invoice_tran_id: invoice_tran_id, created_at: created_at).count == 0
+  end
+
   private
 
   def numericality_of_amount
