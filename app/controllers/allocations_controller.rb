@@ -1,6 +1,7 @@
 class AllocationsController < ApplicationController
   def index
-    @allocations = Allocation.order(created_at: :desc)
+    @q = Allocation.ransack(params[:q])
+    @allocations = @q.result.includes(invoice_tran: [:tranhead]).order(created_at: :desc)
   end
 
   def new
