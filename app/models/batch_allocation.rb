@@ -54,8 +54,8 @@ class BatchAllocation
   def allocations
     @allocations ||= if receipt_tran
                        Transimat.includes(:tranhead).where('tranheads.case_id = ?', receipt_tran.case_id).references(:tranheads).map do |invoice_tran|
-                         Allocation.new receipt_tran_id: receipt_tran_id, invoice_tran_id: invoice_tran.id
-                       end
+                         Allocation.new receipt_tran_id: receipt_tran_id, invoice_tran_id: invoice_tran.id if invoice_tran.to_alloc > 0
+                       end.compact
                      else
                        []
                      end

@@ -19,19 +19,19 @@
             Amount Received
           </div>
           <div class="col-md-2">
-            <%= @batch_allocation.receipt_tran.tramount %>
+            <%= number_with_precision @batch_allocation.receipt_tran.tramount, precision: 2 %>
           </div>
           <div class="col-md-1">
             Allocated
           </div>
           <div class="col-md-2">
-            <%= @batch_allocation.receipt_tran.allocated %>
+            <%= number_with_precision @batch_allocation.receipt_tran.allocated, precision: 2 %>
           </div>
           <div class="col-md-2">
             Amount to Allocate
           </div>
           <div id="receipt_to_alloc" class="col-md-2" data-to-alloc="<%= @batch_allocation.receipt_tran.tramount - @batch_allocation.receipt_tran.allocated %>">
-            <%= @batch_allocation.receipt_tran.tramount - @batch_allocation.receipt_tran.allocated %>
+            <%= number_with_precision @batch_allocation.receipt_tran.tramount - @batch_allocation.receipt_tran.allocated, precision: 2 %>
           </div>
           <div class="col-md-1">
             <%= button_tag id: 'autoallocate', class: 'btn btn-default', type: 'button' do %>

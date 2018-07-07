@@ -8,10 +8,12 @@
   <td><%= allocation.invoice_tran.nominal.code %></td>
   <td><%= allocation.invoice_tran.tranhead.case.reference %></td>
   <td><%= allocation.invoice_tran.tranhead.case.client.info %></td>
-  <td><%= allocation.invoice_tran.netamount %></td>
-  <td><%= allocation.invoice_tran.outamount %></td>
-  <td><%= allocation.invoice_tran.tramount %></td>
-  <td class="to_alloc" data-invoice-id="<%= allocation.invoice_tran.id %>"><%= allocation.invoice_tran.to_alloc %></td>
+  <td class="text-right"><%= number_with_precision allocation.invoice_tran.netamount, precision: 2 %></td>
+  <td class="text-right"><%= number_with_precision allocation.invoice_tran.outamount, precision: 2 %></td>
+  <td class="text-right"><%= number_with_precision allocation.invoice_tran.tramount, precision: 2 %></td>
+  <td class="to_alloc text-right" data-invoice-id="<%= allocation.invoice_tran.id %>">
+    <%= number_with_precision allocation.invoice_tran.to_alloc, precision: 2 %>
+  </td>
   <td>
     <div class="input-group">
       <%= f.input :amount, label: false, input_html: {
@@ -26,6 +28,6 @@
       </span>
     </div>
   </td>
-  <td><%= allocation.invoice_tran.allocated %></td>
-  <td><%= allocation.vat %></td>
+  <td class="text-right"><%= number_with_precision allocation.invoice_tran.allocated, precision: 2 %></td>
+  <td class="text-right"><%= number_with_precision allocation.invoice_tran.vatamount, precision: 2 %></td>
 </tr>

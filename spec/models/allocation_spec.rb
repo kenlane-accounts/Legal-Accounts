@@ -256,4 +256,30 @@ RSpec.describe Allocation, type: :model do
       end
     end
   end
+
+  describe '#before_destroy' do
+    before { allocation.save! }
+    describe 'when can delete' do
+      it 'returns true' do
+        expect(allocation.destroy).to be_truthy
+      end
+
+      it 'deletes a record' do
+        expect{ allocation.destroy }.to change{ Allocation.unscoped.count }.by -1
+      end
+    end
+
+    describe 'when can not delete' do
+      before { create :allocation, invoice_tran_id: allocation.invoice_tran_id }
+
+      it 'returns false' do
+        expect(allocation.destroy).to be_falsey
+      end
+
+      it 'does not delete a record' do
+        expect{ allocation.destroy }.to_not change{ Allocation.unscoped.count }
+      end
+    end
+  end
+
 end
