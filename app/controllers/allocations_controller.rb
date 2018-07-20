@@ -2,6 +2,10 @@ class AllocationsController < ApplicationController
   def index
     @q = Allocation.ransack(params[:q])
     @allocations = @q.result.includes(invoice_tran: [:tranhead]).order(created_at: :desc)
+    respond_to do |format|
+      format.html
+      format.js { render partial: 'allocation_list_modal' }
+    end
   end
 
   def new

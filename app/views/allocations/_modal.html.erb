@@ -30,13 +30,18 @@
           <div class="col-md-2">
             Amount to Allocate
           </div>
-          <div id="receipt_to_alloc" class="col-md-2" data-to-alloc="<%= @batch_allocation.receipt_tran.tramount - @batch_allocation.receipt_tran.allocated %>">
+          <div id="receipt_to_alloc" class="col-md-1" data-to-alloc="<%= @batch_allocation.receipt_tran.tramount - @batch_allocation.receipt_tran.allocated %>">
             <%= number_with_precision @batch_allocation.receipt_tran.tramount - @batch_allocation.receipt_tran.allocated, precision: 2 %>
           </div>
-          <div class="col-md-1">
-            <%= button_tag id: 'autoallocate', class: 'btn btn-default', type: 'button' do %>
+          <div class="col-md-2">
+            <%= button_tag id: 'autoallocate', class: 'btn btn-primary', type: 'button' do %>
               <span class="glyphicon glyphicon-fullscreen"></span>
             <% end %>
+
+              <%= button_tag id: 'allocation_list_button', class: 'btn btn-default', type: 'button',
+                             data: { toggle: "modal", target: '#allocationListModal', receipt_tran_id: @batch_allocation.receipt_tran_id } do %>
+                Allocations
+              <% end %>
           </div>
         </div>
 
