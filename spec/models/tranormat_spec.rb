@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Tranormat, type: :model do
+  before { Company.current_company_id = 1 }
+
   let(:tranormat) { build :tranormat }
   subject{ tranormat }
 
@@ -47,6 +49,25 @@ RSpec.describe Tranormat, type: :model do
 
       it 'returns the rest' do
         expect(tranormat.to_alloc).to eq 40
+      end
+    end
+  end
+
+  describe '#destroy' do
+    describe 'when it has allocations' do
+      before do
+        tranormat.save!
+
+        a = build :allocation, receipt_tran: tranormat, amount: 10
+        a.invoice_tran.tranhead.update! case_id: tranormat.case_id
+        a.save!
+      end
+
+      it 'removes the record' do
+        expect{ tranormat.tranhead.reload.destroy }.to change{ Tranormat.count }
+      end
+      it 'removes a child record' do
+        expect{ tranormat.tranhead.reload.destroy }.to change{ Allocation.count }.by -1
       end
     end
   end

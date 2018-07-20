@@ -22,7 +22,18 @@ class AllocationModal
           available = receipt_to_alloc - (current_alloc() - Number(input.val()))
           to_alloc = Math.min(invoice_to_alloc, available)
           if to_alloc >= 0.01
-            input.val(to_alloc)
+            input.val(to_alloc).change()
+
+      $('.allocation_amount_input').change ->
+        not_alloc_out = $(this).data('outamount') - $(this).data('allocated')
+        not_alloc_out = if not_alloc_out < 0 then 0.0 else not_alloc_out
+        vatable_amount = $(this).val() - not_alloc_out
+        vatable_amount = if vatable_amount < 0 then 0.0 else vatable_amount
+        vat = vatable_amount - (vatable_amount * 100.0 / (100 + parseFloat($(this).data('vatperc'))))
+        total_vat = parseFloat($(this).data('vat-allocated')) + vat
+
+        vat_elem = $(this).closest('tr').find('.vat')
+        vat_elem.text $.number(total_vat, 2)
 
 
 current_alloc = ->

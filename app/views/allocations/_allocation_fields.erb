@@ -19,7 +19,12 @@
       <%= f.input :amount, label: false, input_html: {
           class: 'allocation_amount_input',
           data: { 'invoice-id' => allocation.invoice_tran.id,
-                  'to-alloc' => allocation.invoice_tran.to_alloc }
+                  'to-alloc' => allocation.invoice_tran.to_alloc,
+                  'outamount' => allocation.invoice_tran.outamount,
+                  'allocated' => allocation.invoice_tran.allocated,
+                  'vatperc' => allocation.invoice_tran.vatperc,
+                  'vat-allocated' => allocation.invoice_tran.vat_allocated
+          }
       }
       %>
       <span class="input-group-btn">
@@ -29,5 +34,5 @@
     </div>
   </td>
   <td class="text-right"><%= number_with_precision allocation.invoice_tran.allocated, precision: 2 %></td>
-  <td class="text-right"><%= number_with_precision allocation.invoice_tran.vatamount, precision: 2 %></td>
+  <td class="vat text-right"><%= number_with_precision allocation.invoice_tran.vat_allocated, precision: 2 %></td>
 </tr>

@@ -14,6 +14,7 @@
 //= require jquery.turbolinks
 //= require jquery_ujs
 //= require jquery-ui/autocomplete
+//= require jquery.number
 //= require autocomplete-rails
 //= require accounts
 //= require_tree .

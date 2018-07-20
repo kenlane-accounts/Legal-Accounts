@@ -1,6 +1,6 @@
 class Tranormat < Tran
 
-  has_many :allocations, foreign_key: 'receipt_tran_id'
+  has_many :allocations, foreign_key: 'receipt_tran_id', dependent: :delete_all
 
   validates_presence_of :trdetails
   validates_presence_of :tramount

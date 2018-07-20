@@ -8,7 +8,7 @@ FactoryBot.define do
       bank
 
       after(:build) do |tranhead, evaluator|
-        tranhead.trans << build(:receipt_tran, tranhead: tranhead)
+        tranhead.trans << build(:receipt_tran, tranhead: tranhead) if tranhead.trans.empty?
       end
     end
 

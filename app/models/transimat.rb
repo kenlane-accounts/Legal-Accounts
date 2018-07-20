@@ -1,6 +1,6 @@
 class Transimat < Tran
 
-  has_many :allocations, foreign_key: 'invoice_tran_id'
+  has_many :allocations, foreign_key: 'invoice_tran_id', dependent: :restrict_with_error
   validates_presence_of :trdetails
   validates_presence_of :tramount
   validates_presence_of :nominal
@@ -51,6 +51,10 @@ class Transimat < Tran
 
   def allocated
     allocations.sum(:amount)
+  end
+
+  def vat_allocated
+    allocations.sum :vat
   end
 
   def to_alloc
