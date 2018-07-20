@@ -25,16 +25,24 @@ class AllocationModal
             input.val(to_alloc).change()
 
       $('.allocation_amount_input').change ->
-        not_alloc_out = $(this).data('outamount') - $(this).data('allocated')
+        val = parseFloat $(this).val()
+        allocated = parseFloat $(this).data('allocated')
+        not_alloc_out = $(this).data('outamount') - allocated
         not_alloc_out = if not_alloc_out < 0 then 0.0 else not_alloc_out
-        vatable_amount = $(this).val() - not_alloc_out
+        vatable_amount = val - not_alloc_out
         vatable_amount = if vatable_amount < 0 then 0.0 else vatable_amount
         vat = vatable_amount - (vatable_amount * 100.0 / (100 + parseFloat($(this).data('vatperc'))))
         total_vat = parseFloat($(this).data('vat-allocated')) + vat
 
-        vat_elem = $(this).closest('tr').find('.vat')
+        tr = $(this).closest('tr')
+        vat_elem = tr.find('.vat')
         vat_elem.text $.number(total_vat, 2)
 
+        to_alloc = $(this).data('to-alloc') - val
+        tr.find('.to-alloc').text $.number(to_alloc, 2)
+
+        allocated = allocated + val
+        tr.find('.allocated').text $.number(allocated, 2)
 
 current_alloc = ->
   sum = 0

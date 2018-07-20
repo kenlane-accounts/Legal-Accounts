@@ -11,7 +11,7 @@
   <td class="text-right"><%= number_with_precision allocation.invoice_tran.netamount, precision: 2 %></td>
   <td class="text-right"><%= number_with_precision allocation.invoice_tran.outamount, precision: 2 %></td>
   <td class="text-right"><%= number_with_precision allocation.invoice_tran.tramount, precision: 2 %></td>
-  <td class="to_alloc text-right" data-invoice-id="<%= allocation.invoice_tran.id %>">
+  <td class="to-alloc text-right" data-invoice-id="<%= allocation.invoice_tran.id %>">
     <%= number_with_precision allocation.invoice_tran.to_alloc, precision: 2 %>
   </td>
   <td>
@@ -33,6 +33,6 @@
       </span>
     </div>
   </td>
-  <td class="text-right"><%= number_with_precision allocation.invoice_tran.allocated, precision: 2 %></td>
+  <td class="allocated text-right"><%= number_with_precision allocation.invoice_tran.allocated, precision: 2 %></td>
   <td class="vat text-right"><%= number_with_precision allocation.invoice_tran.vat_allocated, precision: 2 %></td>
 </tr>
