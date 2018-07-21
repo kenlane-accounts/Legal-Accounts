@@ -5,6 +5,7 @@
   <td><%= allocation.invoice_tran.nominal.code %></td>
   <td><%= allocation.invoice_tran.tranhead.case.reference %></td>
   <td><%= allocation.invoice_tran.tranhead.case.client.info %></td>
+  <td class="receipt_no"><%= allocation.receipt_tran.tranhead.trref %></td>
   <td class="text-right"><%= number_with_precision allocation.amount, precision: 2 %></td>
   <td class="text-right"><%= number_with_precision allocation.vat, precision: 2 %></td>
   <td>
