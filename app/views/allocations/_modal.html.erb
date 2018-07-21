@@ -24,7 +24,7 @@
           <div class="col-md-1">
             Allocated
           </div>
-          <div class="col-md-2">
+          <div class="total-allocated col-md-2" data-allocated="<%= @batch_allocation.receipt_tran.allocated %>">
             <%= number_with_precision @batch_allocation.receipt_tran.allocated, precision: 2 %>
           </div>
           <div class="col-md-2">

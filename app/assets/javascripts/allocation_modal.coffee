@@ -44,6 +44,14 @@ class AllocationModal
         allocated = allocated + val
         tr.find('.allocated').text $.number(allocated, 2)
 
+        total_allocated_elem = $('.total-allocated')
+        orig_allocated = Number(total_allocated_elem.data('allocated'))
+        total_allocated_elem.text $.number(orig_allocated + current_alloc(), 2)
+
+        to_alloc_elem = $('#receipt_to_alloc')
+        receipt_to_alloc = Number to_alloc_elem.data('toAlloc')
+        to_alloc_elem.text $.number(receipt_to_alloc - current_alloc(), 2)
+
 current_alloc = ->
   sum = 0
   for el in $('.allocation_amount_input')
