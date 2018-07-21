@@ -10,4 +10,12 @@ class AllocationListModal
       modal.load "/allocations.js?q[invoice_tran_id_eq]=#{invoice_tran_id}", ->
         $('.invoice_no').hide()
 
+  hide: (e)->
+    if $('#batch_allocation_receipt_tran_id').length
+      event = { relatedTarget: "<i data-id='#{$('#batch_allocation_receipt_tran_id').val()}'></i>" }
+      Accounts.allocationModal.init(event)
+
 this.Accounts.allocationListModal = new AllocationListModal()
+$ ->
+  $('#allocationListModal').on 'hide.bs.modal', (e) ->
+    Accounts.allocationListModal.hide(e)
