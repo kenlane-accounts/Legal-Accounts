@@ -1,6 +1,6 @@
 <tr>
   <td><%= allocation.created_at.to_date %></td>
-  <td><%= allocation.invoice_tran.tranhead.trref %></td>
+  <td class="invoice_no"><%= allocation.invoice_tran.tranhead.trref %></td>
   <td><%= allocation.invoice_tran.trdetails %></td>
   <td><%= allocation.invoice_tran.nominal.code %></td>
   <td><%= allocation.invoice_tran.tranhead.case.reference %></td>

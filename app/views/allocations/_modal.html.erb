@@ -38,10 +38,8 @@
               <span class="glyphicon glyphicon-fullscreen"></span>
             <% end %>
 
-              <%= button_tag id: 'allocation_list_button', class: 'btn btn-default', type: 'button',
-                             data: { toggle: "modal", target: '#allocationListModal', receipt_tran_id: @batch_allocation.receipt_tran_id } do %>
-                Allocations
-              <% end %>
+              <%= button_tag 'Allocations', id: 'allocation_list_button', class: 'btn btn-default', type: 'button',
+                             data: { toggle: "modal", target: '#allocationListModal', receipt_tran_id: @batch_allocation.receipt_tran_id } %>
           </div>
         </div>
 
