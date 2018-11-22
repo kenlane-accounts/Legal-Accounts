@@ -9,13 +9,13 @@ default: &default
   encoding: unicode
   pool: 5
   timeout: 5000
-  port: 5433
+  # port: 5433
   user: postgres
-  password: 123456
+  password: postgres
 
 development:
   <<: *default
-  database: accounts
+  database: accounts_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
